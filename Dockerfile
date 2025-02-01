@@ -1,20 +1,14 @@
 # Etapa de build - usa a imagem do OpenJDK para compilar e empacotar a aplicação
 FROM openjdk:17-jdk-slim AS build
 
-# Instalando o Maven
-RUN apt-get update && apt-get install -y maven
-
 # Definindo o diretório de trabalho
 WORKDIR /minha-app
 
 # Copiando o arquivo pom.xml para o contêiner (adicionando o destino)
-COPY pom.xml /minha-app/
-
-# Baixando as dependências do Maven
-RUN mvn dependency:go-offline
+COPY pom.xml .
 
 # Copiando o código-fonte
-COPY src /minha-app/src
+COPY src ./src
 
 # Compilando e empacotando a aplicação
 RUN mvn clean package -DskipTests
