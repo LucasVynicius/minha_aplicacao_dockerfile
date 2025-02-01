@@ -5,8 +5,9 @@ From openjdk:17-jdk-slim As build
 WORKDIR /minha-app
 
 # Copiando o arquivo pom.xml e baixando as dependências
-COPY pom.xml
+COPY pom.xml /minha-app
 
+# Baixando as dependências do Maven
 RUN mvn dependency:go-offline
 
 # Copiando o código-fonte
